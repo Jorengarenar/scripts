@@ -16,5 +16,3 @@ done
 
 read -r -p 'Installation command: ' installation_command
 $installation_command $list
-
-unset list
