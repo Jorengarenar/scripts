@@ -1,3 +1,3 @@
 #!/bin/env bash
 
-xinit $(which $1) $* -- :0 vt$XDG_VTNR
+xinit $(which $1) $* -- :$(tty | sed "s/[^0-9]*//g") vt$XDG_VTNR
