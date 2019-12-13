@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mnt_path='$HOME/mnt'
+
 plugged=$(ideviceinstaller -l 2> /dev/null)
 if [[ $plugged == "" ]]; then
     echo "No iOS device found, is it plugged in?"
@@ -26,7 +28,7 @@ else
     while [ true ]
     do
         x="ios$j"
-        if [ -d /mnt/$x ]; then
+        if [ -d $mnt_path/$x ]; then
             (( j++ ))
         else
             break
@@ -35,12 +37,12 @@ else
 
     re='^[0-9]+$'
     if [[ $option == '0' ]]; then
-        mkdir /mnt/$x
-        ifuse /mnt/$x
+        mkdir $mnt_path/$x
+        ifuse $mnt_path/$x
     elif [[ $option =~ $re ]] ; then
         if ! [ $option -ge $i ]; then
-            mkdir /mnt/$x
-            ifuse --documents ${appid[$option]} /mnt/$x
+            mkdir $mnt_path/$x
+            ifuse --documents ${appid[$option]} $mnt_path/$x
         fi
     fi
 fi

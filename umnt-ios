@@ -1,8 +1,10 @@
 #!/bin/bash
 
+mnt_path='$HOME/mnt'
+
 cd
 for i in $@; do
-    fusermount -u $HOME/.mount/ios$i
+    fusermount -u $mnt_path/ios$i
 done
-rmdir $HOME/.mount/* &> /dev/null
+rmdir $mnt_path/* &> /dev/null
 cd - &> /dev/null
