@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+machine="$XDG_VM_DIR/$1"
+
+[ ! -f "$machine/disk.img" ] && exit 1
+
+qemu-system-x86_64 \
+    -drive driver=raw,file="$machine/disk.img" \
+    -m 2048 -enable-kvm -M pc \
+    -cpu host -smp cores=4,threads=1 \
+    -bios /usr/share/qemu/bios.bin -boot menu=on \
+    -net nic \
+    -net user,smb="$XDG_PUBLICSHARE_DIR" \
+    -usb -device usb-tablet \
+    -vga std -device virtio-serial-pci -spice port=5999,password=qaz -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent \
+    &
+
+sleep 1 && exec spicy -h 127.0.0.1 -p 5999 -w qaz
