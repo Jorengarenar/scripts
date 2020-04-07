@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 for file in $@; do
     if [ -e $file ]; then
@@ -14,5 +14,6 @@ for file in $@; do
     fi
 done
 
-read -r -p 'Installation command: ' installation_command
+echo -n 'Installation command: '
+read -r installation_command
 $installation_command $list

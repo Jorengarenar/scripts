@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 mnt_path='$HOME/mnt'
 

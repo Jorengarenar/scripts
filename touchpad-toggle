@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 ID="$(xinput list | grep -io 'touchpad.*id=[0-9]*' | sed 's/^.*id=//')"
 
